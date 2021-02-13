@@ -1,0 +1,9 @@
+
+
+.board {
+    display: flexbox;
+}
+
+.box {
+    display: inline;
+}
