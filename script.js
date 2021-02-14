@@ -1,37 +1,50 @@
-// Initialize the Board
-function initBoard (rows) {
+// 1) Initialize the Board
+function initBoard(rows) {
     let arr = [];
     for (let i = 0; i < rows.length; i++) {
         let row = [];
         for (let j = 0; j < rows[i].children.length; j++) {
-            row.push(rows[i].children[j]);
+            row.push(rows[i].children[j].children[0]);
         }
         arr.push(row);
     }
+    console.log(arr);
     return arr;
 }
+
 const rows = document.getElementsByClassName("row");
 const boardArray = initBoard(rows);
+let clickedBox = [];
 let turn = true;
-// Add Board Event Listener
-board.addEventListener("click", (e) => {
-    if (turn) {
-        turn = false;
-        e.target.innerHTML = "X";
-    } else {
-        turn = true;
-        e.target.innerHTML = "O";
-    }
-    sqIndex = getIndex(e.target); 
-    console.log(sqIndex);
-    // Add O or X depending on t/f
-    checkBoard(sqIndex, "row");
-    checkBoard(sqIndex, "column");
-    checkBoard(sqIndex, "diagonal");
-    
+
+// 2) Add Board Event Listener
+const boxes = document.querySelectorAll(".box");
+boxes.forEach(item => {
+    item.addEventListener("click", (e) => {
+        e.preventDefault();
+        let target = e.target;
+        if (clickedBox.includes(target)) return;
+        if (e.target.classList.contains("box")) target = e.target.children[0];
+        clickedBox.push(target);
+        clickedBox.push(target.parentElement);
+        if (turn) {
+            turn = false;
+            target.innerHTML = "X";
+        } else {
+            turn = true;
+            target.innerHTML = "O";
+        }
+        target.style.opacity = "1";
+        console.log(target);
+        sqIndex = getIndex(target);
+        console.log(sqIndex);
+        if (checkBoard(sqIndex, "row") || checkBoard(sqIndex, "column") || checkBoard(sqIndex, "diagonal")) {
+            console.log("nice win");
+        }
+    })
 })
 
-// Board Functions
+// 3) Board Functions
 function getIndex(target) {
     for (let x = 0; x < boardArray.length; x++) {
         for (let y = 0; y < boardArray[x].length; y++) {
@@ -75,14 +88,21 @@ function checkBoard(arr, direction=String) {
     let s = eval_string.join("");
     if (s == "XXX" || s == "OOO") {
         eval.forEach(e => {
-            e.style.color= "red"; // Format CSS
-        })  
+            e.style.color= "red";
+        })
+        return true;
     }
 }
 
-// Reset Button
+// 4) Add Reset Button Listener
 const resetButton = document.getElementById("resetButton");
 
 resetButton.addEventListener("click", (e) => {
-    console.log("reset"); // -> clear
+    console.log("reset");
+    boxes.forEach(e => {
+        e.children[0].style.opacity = "0";
+        e.children[0].style.color = "white";
+        e.children[0].innerHTML = "1";
+    });
+    clickedBox = [];
 })

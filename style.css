@@ -1,9 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap");
 
-
-.board {
-    display: flexbox;
+/* Alignment and Colours */
+@media screen {
+    body {
+        text-align: center;
+        background-color: #17141d;
+        color: white;
+        font-family: "DM Mono", monospace;
+        margin: 0;
+    }
+    
+    p {
+        margin: 0;
+        opacity: 0;
+    }
+    
+    #board, .row  {
+        display: inline;
+    }
+    
+    .box {
+        display: table-cell;
+        
+    }
+    
+    .button {
+        display: block;
+        color: white;
+        border-color: white;
+        background-color: #17141d;
+    }
+    
+    /* Additional Effects */
+    .box:hover, .button:hover {
+        background-color: greenyellow;
+    }
 }
 
-.box {
-    display: inline;
+
+/* Media Sizing */
+@media screen and (max-width: 959px) {
+    h1 {
+        padding: 2vw 0;
+        font-size: clamp(0.5vw, -0.875vw + 8.333vw, 3.5vw);
+    }
+    
+    .box {
+        padding: .95vw 5.15vw;
+        font-size: 12vw;
+    }
+    
+    .box, .button {
+        box-shadow: -1vw 1vw 5vw 1vw black;
+        background-color: #17141d;
+        
+    }
+
+    .button {
+        font-size: clamp(0.35vw, -0.5vw + 8.333vw, 2vw);
+        margin: 2vw auto;
+        padding: 1vw;
+    }
 }
+
+/* Max Media Size */
+@media screen and (min-width: 960px) {
+    h1 {
+        padding: 19.2px 0;
+        font-size: clamp(4.8px, -8.4px + 79.9968px, 33.6px);
+    }
+    
+    .box {
+        padding: 9.12px 49.44px;
+        font-size: 115.2px;
+    }
+    
+    .box, .button {
+        box-shadow: -9.6px 9.6px 48px 9.6px black;
+        background-color: #17141d;
+    }
+
+    .button {
+        font-size: clamp(3.36px, -4.8px + 9.9968px, 19.2px);
+        margin: 19.2px auto;
+        padding: 9.6px;
+    }
+}
+
