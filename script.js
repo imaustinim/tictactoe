@@ -12,6 +12,7 @@ function initBoard(rows) {
     return arr;
 }
 
+const header = document.getElementById("header");
 const rows = document.getElementsByClassName("row");
 const boardArray = initBoard(rows);
 let clickedBox = [];
@@ -30,16 +31,18 @@ boxes.forEach(item => {
         if (turn) {
             turn = false;
             target.innerHTML = "X";
+            header.innerHTML = "Player O's Turn";
         } else {
             turn = true;
             target.innerHTML = "O";
+            header.innerHTML = "Player X's Turn";
         }
         target.style.opacity = "1";
-        console.log(target);
+        // console.log(target);
         sqIndex = getIndex(target);
-        console.log(sqIndex);
+        // console.log(sqIndex);
         if (checkBoard(sqIndex, "row") || checkBoard(sqIndex, "column") || checkBoard(sqIndex, "diagonal")) {
-            console.log("nice win");
+            // console.log("nice win");
         }
     })
 })
