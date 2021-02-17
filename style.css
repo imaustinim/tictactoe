@@ -15,8 +15,11 @@
         opacity: 0;
     }
     
-    #board, .row  {
-        display: inline;
+    #board {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     
     .box {
@@ -39,7 +42,7 @@
 /* Media Sizing */
 @media screen and (max-width: 959px) {
     h1 {
-        padding: 2vw 0 0 0;
+        padding: 2vw 0;
         font-size: clamp(0.5vw, -0.875vw + 8.333vw, 3.5vw);
     }
     
